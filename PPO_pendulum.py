@@ -79,7 +79,7 @@ class Agent():
     clip_param = 0.2
     max_grad_norm = 0.5
     ppo_epoch = 10
-    buffer_capacity, batch_size = 1000, 320
+    buffer_capacity, batch_size = 10000, 3200
 
     def __init__(self):
         self.training_step = 0
@@ -161,8 +161,8 @@ class Agent():
                 value_loss.backward()
                 nn.utils.clip_grad_norm_(self.cnet.parameters(), self.max_grad_norm)
                 self.optimizer_c.step()
-                writer.add_scalar('loss/action_loss_lr(e-5,3e-5)_(100000,32000)', action_loss, self.update_num)
-                writer.add_scalar('loss/value_loss_lr(e-5,3e-5)_(100000,32000)', value_loss, self.update_num)
+                writer.add_scalar('loss/action_loss_lr(1e-4,3e-4)_(1000,320)_actornetwork-', action_loss, self.update_num)
+                writer.add_scalar('loss/value_loss_lr(1e-4,3e-4)_(1000,320)_actornetwork-', value_loss, self.update_num)
                 self.update_num += 1
 
 
@@ -196,7 +196,7 @@ def main():
             score += reward
             state = state_
         all_rew.append(score)
-        writer.add_scalar('loss/action_loss2_lr(e-5,3e-5)_(100000,32000)', score, i_ep)
+        writer.add_scalar('reward/reward_lr(1e-4,3e-4)_(1000,320)_actornetwork-', score, i_ep)
         plt.cla()
         plt.subplot(211)
         plt.cla()
