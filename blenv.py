@@ -690,7 +690,7 @@ class BlueSkyEnv(gym.Env):
         # rew1 = -(obs[3] ** 2 + obs[4] ** 2) ** 0.5
         rew1 = -(((obs[3])**2 + obs[4]**2)**0.5)
 
-        self.reward = rew1 + 1        # self.reward = [rew1, rew2, rew3, good_rew]
+        self.reward = rew1      # self.reward = [rew1, rew2, rew3, good_rew]
 
         # for i in range(2):   #目前只判断了后四架飞机是否前四架的攻击范围内
         #     for j in range(2,4):
